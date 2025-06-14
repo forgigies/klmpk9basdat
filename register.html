@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar Akun Baru - Universitas Brawijaya</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), 
+                  url('https://www.campus.j-tech.co.id/files/kampus_foto/1/5865928743_74eacbd4ce_z.jpg') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+    
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(8px);
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
+    
+    .register-container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 450px;
+      display: flex;
+      justify-content: center;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .register-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      padding: 40px 35px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      width: 100%;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    .register-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .logo-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .logo-header img {
+      height: 90px;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5));
+    }
+    
+    .logo-header h1 {
+      color: #fff;
+      font-size: 28px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      letter-spacing: 0.5px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left;
+      position: relative;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      color: #fff;
+      font-weight: 600;
+      font-size: 18px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      padding-left: 5px;
+    }
+    
+    .form-group i {
+      position: absolute;
+      left: 15px;
+      top: 45px;
+      color: #28a745;
+      font-size: 20px;
+    }
+    
+    .form-group input {
+      width: 100%;
+      padding: 15px 15px 15px 50px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.3);
+      font-size: 17px;
+      background-color: rgba(255, 255, 255, 0.95);
+      transition: all 0.3s;
+      box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .form-group input:focus {
+      outline: none;
+      border-color: #28a745;
+      box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+      background-color: white;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #28a745, #1e7e34);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: all 0.3s;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #218838, #1a6b2c);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+    
+    .submit-btn:active {
+      transform: translateY(1px);
+    }
+    
+    .login-link {
+      display: block;
+      margin-top: 25px;
+      color: #ffeb3b;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 17px;
+      transition: all 0.3s;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      position: relative;
+      padding-bottom: 3px;
+    }
+    
+    .login-link:hover {
+      color: #ffffff;
+    }
+    
+    .login-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #ffeb3b;
+      transition: width 0.3s;
+    }
+    
+    .login-link:hover::after {
+      width: 100%;
+    }
+    
+    .footer-text {
+      margin-top: 30px;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 16px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+      line-height: 1.6;
+    }
+    
+    /* Responsive untuk handphone */
+    @media (max-width: 768px) {
+      .register-box {
+        padding: 35px 30px;
+        border-radius: 22px;
+      }
+      
+      .logo-header img {
+        height: 80px;
+      }
+      
+      .logo-header h1 {
+        font-size: 26px;
+      }
+      
+      .form-group label {
+        font-size: 17px;
+      }
+      
+      .form-group i {
+        font-size: 18px;
+        top: 43px;
+      }
+      
+      .form-group input {
+        padding: 14px 14px 14px 45px;
+        font-size: 16px;
+      }
+      
+      .submit-btn {
+        padding: 15px;
+        font-size: 17px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
+      }
+      
+      .register-box {
+        padding: 30px 25px;
+        border-radius: 20px;
+      }
+      
+      .logo-header img {
+        height: 70px;
+      }
+      
+      .logo-header h1 {
+        font-size: 24px;
+      }
+      
+      .form-group i {
+        font-size: 16px;
+        top: 40px;
+        left: 12px;
+      }
+      
+      .form-group input {
+        padding: 13px 13px 13px 42px;
+        font-size: 15px;
+      }
+      
+      .submit-btn {
+        padding: 14px;
+        font-size: 16px;
+      }
+      
+      .login-link {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <div class="register-container">
+    <div class="register-box">
+      <div class="logo-header">
+        <img src="https://wiki.ub.ac.id/lib/exe/fetch.php?media=ub-logo-small.png" alt="Logo Universitas Brawijaya">
+        <h1>Daftar Akun Baru</h1>
+      </div>
+
+      <form id="registerForm" action="register.php" method="POST" autocomplete="off">
+        <div class="form-group">
+          <label for="nim">NIM</label>
+          <i class="fas fa-id-card"></i>
+          <input type="text" id="nim" name="nim" placeholder="Masukkan NIM" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <i class="fas fa-lock"></i>
+          <input type="password" id="password" name="password" placeholder="Buat password" required>
+        </div>
+
+        <button type="submit" class="submit-btn">Daftar Sekarang</button>
+      </form>
+
+      <p class="footer-text">Sistem Informasi Akademik<br>Universitas Brawijaya</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('registerForm');
+      form.reset();
+      document.getElementById('nim').value = '';
+      document.getElementById('password').value = '';
+    });
+
+    // Gantikan tombol login link dengan redirect otomatis setelah submit
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const nim = document.getElementById('nim').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      const formData = new FormData();
+      formData.append('nim', nim);
+      formData.append('password', password);
+
+      fetch('register.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.text())
+      .then(res => {
+        alert("Pendaftaran berhasil! Silakan login.");
+        window.location.href = 'klmpk9.html'; // kembali ke halaman login
+      })
+      .catch(err => {
+        alert("Terjadi kesalahan.");
+        console.error(err);
+      });
+    });
+
+    window.addEventListener('pageshow', function (event) {
+      if (event.persisted) {
+        document.getElementById('registerForm').reset();
+      }
+    });
+  </script>
+</body>
+</html>

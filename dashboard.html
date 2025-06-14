@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <style>
+    body {
+      background: url('https://cdn-web.ruangguru.com/file-uploader/ed60bfce-8ebe-4f2a-ad42-7d6826376970.jpg') center center/cover no-repeat fixed;
+      backdrop-filter: blur(6px);
+      color: white;
+      text-align: center;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: rgba(0,0,0,0.6);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 800px;
+      margin: auto;
+    }
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    th {
+      background-color: rgba(0,0,0,0.7);
+      color: #fff;
+    }
+    td {
+      color: #fff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      background-color: #ff5e5e;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #e60000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Datang di Dashboard</h1>
+    <p id="infoUser"></p>
+
+    <h2>Riwayat Login</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>NIM</th>
+          <th>Terakhir Masuk</th>
+        </tr>
+      </thead>
+      <tbody id="riwayatTable">
+        <!-- Data akan dimasukkan di sini -->
+      </tbody>
+    </table>
+
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    const user = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (!user) {
+      window.location.href = 'klmpk9.html';
+    } else {
+      document.getElementById('infoUser').innerText =
+        `Halo, ${user.username} (NIM: ${user.nim})\nLogin pada: ${user.waktu}`;
+
+      // Tambahkan ke localStorage riwayat
+      let riwayat = JSON.parse(localStorage.getItem('riwayatLogin')) || [];
+      riwayat.push({
+        username: user.username,
+        nim: user.nim,
+        waktu: user.waktu
+      });
+      localStorage.setItem('riwayatLogin', JSON.stringify(riwayat));
+
+      // Tampilkan tabel
+      const tbody = document.getElementById('riwayatTable');
+      tbody.innerHTML = ''; // Clear sebelumnya
+
+      riwayat.slice().reverse().forEach(entry => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${entry.username}</td>
+          <td>${entry.nim}</td>
+          <td>${entry.waktu}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    function logout() {
+      sessionStorage.removeItem('loginUser');
+      window.location.href = 'klmpk9.html';
+    }
+  </script>
+</body>
+</html>
